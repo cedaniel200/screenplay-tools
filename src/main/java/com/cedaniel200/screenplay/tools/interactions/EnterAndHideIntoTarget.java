@@ -4,18 +4,19 @@ import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.actions.EnterValue;
 import net.serenitybdd.screenplay.targets.Target;
 import net.thucydides.core.annotations.Step;
-import org.apache.tools.ant.taskdefs.Tar;
 
-public class EnterWithoutShowingInTheReportIntoTarget extends EnterValue {
+public class EnterAndHideIntoTarget extends EnterValue {
 
     private Target target;
+    private String mask;
 
-    public EnterWithoutShowingInTheReportIntoTarget(String theText, Target target) {
+    public EnterAndHideIntoTarget(String theText, String mask, Target target) {
         super(theText);
         this.target = target;
+        this.mask = mask;
     }
 
-    @Step("{0} enters any text into #target")
+    @Step("{0} enters #mask into #target")
     public <T extends Actor> void performAs(T theUser) {
         target.resolveFor(theUser).type(theText);
         if (getFollowedByKeys().length > 0) {
